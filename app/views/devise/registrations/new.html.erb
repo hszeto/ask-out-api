@@ -6,39 +6,21 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
 
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true%>
-        </div>
+          <%= f.email_field :email, autofocus: true, :placeholder=> "Email" %>
 
-        <div class="field">
-          <%= f.label :name %><br />
-          <%= f.text_field :name %>
-        </div>
+          <%= f.text_field :name, :placeholder=> "Your name" %>
 
-        <div class="field">
-          <%= f.label :display_name %><br />
-          <%= f.text_field :display_name %>
-        </div>
+          <%= f.text_field :display_name, :placeholder=> "Nickname" %>
 
-        <div class="field">
-          <%= f.label :phone %><br />
-          <%= f.telephone_field :phone %>
-        </div>
+          <%= f.telephone_field :phone, :placeholder=> "Phone number" %>
 
-        <div class="field">
-          <%= f.label :password %>
           <%# if @minimum_password_length %>
           <!-- <em>(<%#= @minimum_password_length %> characters minimum)</em> -->
           <%# end %><br />
-          <%= f.password_field :password, autocomplete: "off", :placeholder=> "6 characters minimum" %>
-        </div>
+          <%= f.password_field :password, autocomplete: "off", :placeholder=> "Password. 6 characters minimum" %>
 
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "off" %>
-        </div>
-
+          <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder=> "Confirm password" %>
+        <br>
         <div class="actions pull-right">
           <%= f.submit "Sign up", :class=>"btn btn-outline-primary" %>
         </div>

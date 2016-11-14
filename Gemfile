@@ -25,6 +25,7 @@ gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'puma', '~> 3.0'
 gem "devise"
 gem 'awesome_print', '~> 1.7'
+gem 'toastr_rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
