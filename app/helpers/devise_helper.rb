@@ -1,12 +1,7 @@
 module DeviseHelper
   def devise_error_messages!
-
     if resource.errors.any? && flash.empty?
       msg = resource.errors.full_messages.first
-
-      construct_script msg
-    elsif resource.errors.empty? && flash.present?
-      msg = flash.map{ |k,v| flash[k] }.first
 
       construct_script msg
     else
