@@ -1,0 +1,27 @@
+<%= render "layouts/header" %>
+<div class="header-spacer"></div>
+
+<div class="container">
+
+  <h2>My Friends</h2>
+  <ul>
+    <% for friendship in @user.friendships %>
+      <li>
+        <%=h friendship.friend.name %>
+        (<%= link_to "remove", unfriend_path(friendship), :method => :delete %>)
+      </li>
+    <% end %>
+  </ul>
+
+  <p><%= link_to "Add Friends", add_friends_path %></p>
+
+  <h2>Friended by:</h2>
+  <ul>
+    <% for user in @user.inverse_friends %>
+      <li><%=h user.name %></li>
+    <% end %>
+  </ul>
+
+  <br>
+  <%= link_to "Back", '/', :class => "pull-right btn btn-secondary" %>
+</div>

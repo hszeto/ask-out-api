@@ -1,0 +1,37 @@
+<%= render "layouts/header" %>
+<div class="header-spacer"></div>
+
+<div class="container">
+  <h2>Add them to my list</h2>
+
+  <table class="table table-sm">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for user in @users %>
+        <tr>
+          <td>
+            <strong><%= user.name %></strong>
+          </td>
+          <td>
+            <strong><%= user.email %></strong>
+          </td>
+          <td>
+            <%= link_to "Add",
+              friendships_path(:friend_id => user),
+              :method => :post,
+              :class => "pull-right btn btn-sm btn-info" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  <%= link_to "Back", friends_path, :class => "pull-right btn btn-secondary" %>
+</div>

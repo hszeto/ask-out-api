@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   end
   root 'home#index'
 
+  get     '/friends'     => 'friends#index',       as: :friends
+  get     '/add_friends' => 'friends#add_friends',      as: :add_friends
+  post    '/friendships' => 'friendships#create', as: :friendships
+  delete  '/friendships/:id' => 'friendships#destroy', as: :unfriend
+
   # get '/users/:id' => 'events#index', as: :user
 
   # resources :user
