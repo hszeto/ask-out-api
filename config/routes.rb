@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   post    '/friendships' => 'friendships#create', as: :friendships
   delete  '/friendships/:id' => 'friendships#destroy', as: :unfriend
 
+  scope :api do
+    get '/auth' => 'api#auth'
+  end
+
   # get '/users/:id' => 'events#index', as: :user
 
   # resources :user
