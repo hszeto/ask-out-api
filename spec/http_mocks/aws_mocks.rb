@@ -1,5 +1,4 @@
 def stub_aws_cognito
-
   WebMock.stub_request(:post, "https://cognito-idp.us-west-2.amazonaws.com/")
          .to_return(:status => 200,
                     :body => {

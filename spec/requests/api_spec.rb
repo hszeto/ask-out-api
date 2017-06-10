@@ -1,37 +1,50 @@
-describe 'API' do
+describe 'API: validate_token with AWS Cognito' do
   # let(){ }
-  before do
-    stub_aws_cognito_with_expired_or_no_token
+  context "no Cognito access token" do
+    before do
+      # stub AwsAuth get_cognito_user
+      allow_any_instance_of( AwsAuth )
+        .to receive(:get_cognito_user)
+        .and_return( JSON[ {error: "1 validation error detected: Value at 'accessToken…isfy regular expression pattern: [A-Za-z0-9-_=.]+"}.to_json ] )
+    end
+
+    it 'response 401' do
+      get '/api/auth'
+
+      expect( last_response.status ).to eq 401
+    end
   end
 
-  it 'Fail by no token' do
-    get '/api/auth'
+  context "expired Cognito access token" do
+    before do
+      # stub AwsAuth get_cognito_user
+      allow_any_instance_of( AwsAuth )
+        .to receive(:get_cognito_user)
+        .and_return( JSON[ {error: "Access Token has expired"}.to_json ] )
+    end
 
-    expect( last_response.status ).to eq 401
+    it 'response 401' do
+      header "AUTHORIZATION", "Expired_Cognito_AWS_Token"
+      get '/api/auth'
+
+      expect( last_response.status ).to eq 401
+    end
   end
 
-  it 'Fail by expired token' do
-    header "AUTHORIZATION", "Expired_Cognito_AWS_Token"
-    get '/api/auth'
+  context "valid Cognito access token" do
+    before do
+      # stub AwsAuth get_cognito_user
+      allow_any_instance_of( AwsAuth )
+        .to receive(:get_cognito_user)
+        .and_return( JSON[ {email: "testy@example.com"}.to_json ] )
+    end
 
-    expect( last_response.status ).to eq 401
-  end
-end
+    it 'response 200 and user email' do
+      header "AUTHORIZATION", "Cognito_AWS_Token"
+      get '/api/auth'
 
-describe "API" do
-  before do
-    stub_aws_cognito
-    allow_any_instance_of( AwsAuth )
-      .to receive(:get_cognito_user)
-      .and_return( JSON[ {email: "testy@example.com"}.to_json ] )
-
-  end
-
-  it 'Success' do
-    header "AUTHORIZATION", "Cognito_AWS_Token"
-    get '/api/auth'
-
-    expect( last_response.status ).to eq 200
-    expect( JSON.parse(last_response.body)['email'] ).to eq "testy@example.com"
+      expect( last_response.status ).to eq 200
+      expect( JSON.parse(last_response.body)['email'] ).to eq "testy@example.com"
+    end
   end
 end

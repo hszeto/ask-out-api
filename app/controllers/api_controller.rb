@@ -3,7 +3,7 @@ class ApiController < ApplicationController
   before_action :validate_token
 
   def auth
-    render json: { email: @email }.to_json
+    render status: 200, json: {email: @email}.to_json
   end
 
 
