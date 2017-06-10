@@ -1,4 +1,4 @@
 ENV[ 'RAILS_ENV' ] = 'test'
 ENV[ 'RACK_ENV' ] = 'test'
 ENV[ 'LANGUAGE' ] = 'en'
-ENV[ 'API_AUTHORIZATION' ] = 'Cognito_JWT'
+ENV['AWS_REGION'] = 'us-west-2'

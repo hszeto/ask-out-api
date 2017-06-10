@@ -27,6 +27,7 @@ gem 'puma', '~> 3.0'
 gem "devise"
 gem 'awesome_print', '~> 1.7'
 gem 'toastr_rails'
+gem 'aws-sdk', '~> 2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

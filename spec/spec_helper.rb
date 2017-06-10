@@ -9,7 +9,7 @@ require 'webmock/rspec'
 
 # Shared
 # require 'shared'
-# require 'http_mocks/identity_mock'
+require 'http_mocks/aws_mocks'
 
 # Mongoid.logger.level = Logger::ERROR
 ActiveRecord::Migration.maintain_test_schema!
